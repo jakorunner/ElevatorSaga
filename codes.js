@@ -22,7 +22,7 @@
 
 
 
-// WORKS IN LEVELS: 6,7 (Added a "loadFactor" to ensure the elevator is full before move, to optimize movements)
+// WORKS IN LEVELS: 6,7,8 (Added a "loadFactor" to ensure the elevator is full before move, to optimize movements)
 {
     init: function(elevators, floors) {
         
