@@ -31,7 +31,7 @@
         log = function() { return console.log.apply(console, arguments); };  // log("molas tu"); 
         randomPiso = function(currentPiso){ 
             var res = Math.floor(Math.random() * pisos) + 1;
-            if (res == currentPiso  /*|| res == pisos */) {res = 0};
+            if (res == currentPiso  || res == pisos ) {res = 0};
             return res;                      
         }     
         
