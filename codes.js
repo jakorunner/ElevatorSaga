@@ -164,8 +164,8 @@
             let floor = floors[j];
             var ascen = Math.floor(j/3);
             console.log("elevator: " + ascen + " --> ir a planta -->" + j);
-            floor.on("up_button_pressed", function()   {  elevators[ascen].goToFloor(j);  })
-            floor.on("down_button_pressed", function() {  elevators[ascen].goToFloor(j);  })
+            floor.on("up_button_pressed", function()   {  elevators[ascen].goToFloor(j);  })   // no se ejecuta bien
+            floor.on("down_button_pressed", function() {  elevators[ascen].goToFloor(j);  })   // no se ejecuta bien
         } 
         
         /*
