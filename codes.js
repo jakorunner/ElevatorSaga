@@ -24,11 +24,11 @@
             elevator.on("idle", function() {
                 if ((nivel == 6 || nivel == 7 ) && elevator.loadFactor() > 0.8)   {elevator.goToFloor(randomPiso(elevator.currentFloor()));  }
                 if ( nivel  < 6 || nivel == 16 || nivel == 10)                    {elevator.goToFloor(randomPiso(elevator.currentFloor()));  }
-                if ( nivel == 10){ elevator.goToFloor(randomPiso(elevator.currentFloor()));  }
+               //if ( nivel == 10){ elevator.goToFloor(randomPiso(elevator.currentFloor()));  }
             });      
         }
              
-        if (nivel == 8  || nivel == 9 || nivel == 11){
+        if (nivel == 8  || nivel == 9){
             var ajuste = 1;
             if (nivel == 9) {ajuste = 0;}
             floors[0].on("up_button_pressed",                   function() {  elevators[0].goToFloor(floors[0].floorNum()); }) 
