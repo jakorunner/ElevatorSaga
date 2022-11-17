@@ -1,5 +1,6 @@
 // WORKS IN LEVELS: 1,2,3,4,5,6,7, 16 (optimize time or movements)
 // SOMETIME WORKS ON: 8,9,10,11.
+// CONTINUE ON: 12.
 {
     init: function(elevators, floors) {
         var pisos = floors.length - 1;
@@ -166,31 +167,7 @@
             console.log("elevator: " + ascen + " --> ir a planta -->" + j);
             floor.on("up_button_pressed", function()   {  elevators[ascen].goToFloor(j);  })   // no se ejecuta bien
             floor.on("down_button_pressed", function() {  elevators[ascen].goToFloor(j);  })   // no se ejecuta bien
-        } 
-        
-        /*
-        var elevator0 = elevators[0]; // Let's use the first elevator
-        var elevator1 = elevators[1]; // Let's use the first elevator
-        var floor0 = floors[0];
-        var floor1 = floors[1];
-        var floor2 = floors[2];
-        var floor3 = floors[3];
-        var floor4 = floors[4];
-        var floor5 = floors[5];
-        floor0.on("up_button_pressed", function() { elevator0.goToFloor(0); })
-        floor1.on("up_button_pressed", function() { elevator0.goToFloor(1); })
-        floor1.on("down_button_pressed", function() { elevator0.goToFloor(1); })
-        floor2.on("up_button_pressed", function() { elevator0.goToFloor(2); })       
-        floor2.on("down_button_pressed", function() { elevator0.goToFloor(2); })
-
-        floor3.on("up_button_pressed", function() { elevator1.goToFloor(3); })     
-        floor3.on("down_button_pressed", function() { elevator1.goToFloor(3); })
-        floor4.on("down_button_pressed", function() { elevator1.goToFloor(4); })
-        floor4.on("up_button_pressed", function() { elevator1.goToFloor(4); })
-        floor5.on("down_button_pressed", function() { elevator1.goToFloor(5); })
-        */
-               
-        
+        }           
     },    
         update: function(dt, elevators, floors) {}
 }
