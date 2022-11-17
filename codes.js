@@ -130,3 +130,68 @@
             // We normally don't need to do anything here
         }
 }
+
+
+
+
+
+//// INVESTIGAR POR QUE CASCA EN 8 y 9.
+{
+    init: function(elevators, floors) {
+        var pisos = floors.length - 1;
+        const queryString = window.location.hash;
+        const nivel = queryString.substring(queryString.indexOf('=')+1);
+        console.log("Nivel: " + nivel);
+
+        log = function() { return console.log.apply(console, arguments); };  // log("molas tu"); 
+        randomPiso = function(currentPiso){ 
+            var res = Math.floor(Math.random() * pisos) + 1;
+            if (res == currentPiso  ) {res = 0}
+            if (res == pisos && (nivel == 2)){res = 0;}
+            return res;                      
+        }     
+
+        for(var i=0;i<elevators.length;i++){
+            let elevator = elevators[i];
+            elevator.on("floor_button_pressed", function(floorNum) { elevator.goToFloor(floorNum);} );
+            elevator.on("idle", function() {
+                if ((nivel == 6 || nivel == 7 ) && elevator.loadFactor() > 0.8)   {elevator.goToFloor(randomPiso(elevator.currentFloor()));  }
+                if ( nivel  < 6 || nivel == 16)                                   {elevator.goToFloor(randomPiso(elevator.currentFloor()));  }
+                if ( nivel == 9){}
+            });      
+        } 
+        for(var j=0;j<floors.length;j++){
+            let floor = floors[j];
+            var ascen = Math.floor(j/3);
+            console.log("elevator: " + ascen + " --> ir a planta -->" + j);
+            floor.on("up_button_pressed", function()   {  elevators[ascen].goToFloor(j);  })
+            floor.on("down_button_pressed", function() {  elevators[ascen].goToFloor(j);  })
+        } 
+        
+        /*
+        var elevator0 = elevators[0]; // Let's use the first elevator
+        var elevator1 = elevators[1]; // Let's use the first elevator
+        var floor0 = floors[0];
+        var floor1 = floors[1];
+        var floor2 = floors[2];
+        var floor3 = floors[3];
+        var floor4 = floors[4];
+        var floor5 = floors[5];
+        floor0.on("up_button_pressed", function() { elevator0.goToFloor(0); })
+        floor1.on("up_button_pressed", function() { elevator0.goToFloor(1); })
+        floor1.on("down_button_pressed", function() { elevator0.goToFloor(1); })
+        floor2.on("up_button_pressed", function() { elevator0.goToFloor(2); })       
+        floor2.on("down_button_pressed", function() { elevator0.goToFloor(2); })
+
+        floor3.on("up_button_pressed", function() { elevator1.goToFloor(3); })     
+        floor3.on("down_button_pressed", function() { elevator1.goToFloor(3); })
+        floor4.on("down_button_pressed", function() { elevator1.goToFloor(4); })
+        floor4.on("up_button_pressed", function() { elevator1.goToFloor(4); })
+        floor5.on("down_button_pressed", function() { elevator1.goToFloor(5); })
+        */
+               
+        
+    },    
+        update: function(dt, elevators, floors) {}
+}
+
