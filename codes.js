@@ -1,4 +1,5 @@
-// WORKS IN LEVELS: 1,2,3,4,5,6,7,8 and sometimes 9 and 16 (optimize time)
+// WORKS IN LEVELS: 1,2,3,4,5,6,7,8, 16 (optimize time or movements)
+// SOMETIME WORKS ON: 9,10,11.
 {
     init: function(elevators, floors) {
         var pisos = floors.length - 1;
