@@ -25,30 +25,28 @@
 
             elevator.on("idle", function() {
                
-                //modificar para localizar un piso con "pulsados "cerca"
-
                 if ((nivel == 6 || nivel == 7) && elevator.loadFactor() > 0.8)    {elevator.goToFloor(randomPiso(elevator.currentFloor()));  } // if elevator full, then move (doesnt matter where)
                 else if (nivel == 6 || nivel == 7){ /* if elevator not full, not move, to optimize movements instead of velocity */}
                 else {
-                    // see if any floors have buttons pressed
+                    // see if any floors have buttons pressed and see if there are some "idle" elevators
                     let demand = floors.filter((floor) => (floor.buttonStates.up || floor.buttonStates.down));
                     let offer = elevators.filter((elevator) => elevator.destinationQueue.length == 0);
                     console.log(demand);
                     console.log(offer);
-                    console.log("oferta: " + offer.length + "   demanda:" + demand.length);
+                    console.log("offer: " + offer.length + "   demand:" + demand.length);
 
                     if (demand.length>1){
-                        // TODO: que el ascensor mas cercano vaya al piso correcto y no correlaccionarlos 1-1
+                        // TODO: the nearest elevator go to the nearest floor instead of random-secuencial assignation.
                         if (offer.length <= demand.length){
-                            for(var z=0;z<offer.length;z++){ offer[z].goToFloor(demand[z].floorNum()); console.log("o-elevator (en:"+ offer[z].currentFloor() +") free al: " + demand[z].floorNum());}
+                            for(var z=0;z<offer.length;z++){ offer[z].goToFloor(demand[z].floorNum()); console.log("o-elevator (en:"+ offer[z].currentFloor() +") free to: " + demand[z].floorNum());}
                         } else {
-                            for(var z=0;z<demand.length;z++){ offer[z].goToFloor(demand[z].floorNum()); console.log("d-elevator (en:"+ offer[z].currentFloor() +") free al: " + demand[z].floorNum());}
+                            for(var z=0;z<demand.length;z++){ offer[z].goToFloor(demand[z].floorNum()); console.log("d-elevator (en:"+ offer[z].currentFloor() +") free to: " + demand[z].floorNum());}
                         }
                      }
                      else {
                        if (demand.length) { target = demand[0].floorNum();}    // choose the first one
                            else           {  target = 0; }
-                         elevator.goToFloor(target);            console.log("s-elevator (en:"+ elevator.currentFloor() +") free al: " + target);
+                         elevator.goToFloor(target);            console.log("s-elevator (en:"+ elevator.currentFloor() +") free to: " + target);
                     }
                 }
 
