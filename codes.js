@@ -1,6 +1,8 @@
 // OK: 1 - 12,16,17
-//ERROR: 13,14,18
-// SOMETIMES 15
+// ERROR: 13,14,18
+// SOMETIMES WORKS IN 15
+
+
 {
     init: function(elevators, floors) {
         var pisos = floors.length - 1;
@@ -24,7 +26,7 @@
             elevator.on("floor_button_pressed", function(floorNum) {elevator.goToFloor(floorNum);} );
 
             elevator.on("idle", function() {
-               
+
                 if ((nivel == 6 || nivel == 7) && elevator.loadFactor() > 0.8)    {elevator.goToFloor(randomPiso(elevator.currentFloor()));  } // if elevator full, then move (doesnt matter where)
                 else if (nivel == 6 || nivel == 7){ /* if elevator not full, not move, to optimize movements instead of velocity */}
                 else {
@@ -42,11 +44,11 @@
                         } else {
                             for(var z=0;z<demand.length;z++){ offer[z].goToFloor(demand[z].floorNum()); console.log("d-elevator (en:"+ offer[z].currentFloor() +") free to: " + demand[z].floorNum());}
                         }
-                     }
-                     else {
-                       if (demand.length) { target = demand[0].floorNum();}    // choose the first one
-                           else           {  target = 0; }
-                         elevator.goToFloor(target);            console.log("s-elevator (en:"+ elevator.currentFloor() +") free to: " + target);
+                    }
+                    else {
+                        if (demand.length) { target = demand[0].floorNum();}    // choose the first one
+                        else           {  target = 0; }
+                        elevator.goToFloor(target);            console.log("s-elevator (en:"+ elevator.currentFloor() +") free to: " + target);
                     }
                 }
 
@@ -66,6 +68,10 @@
 
             });
         }  
-    },    
-        update: function(dt, elevators, floors) {}
+    }
+    
+    ,
+    update: function(dt, elevators, floors) {
+        // We normally don't need to do anything here
+    }
 }
